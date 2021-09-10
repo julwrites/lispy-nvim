@@ -30,11 +30,13 @@ For those who are new to Neovim, it can be quite confusing to figure out what th
 
 The basic structure of the configuration is as follows:
 (.config/nvim)
+```
 | init.lua
 | fnl
   | nvim-config
     | init.fnl
     | ...
+```
 
 As of Neovim 0.5, `init.vim` and `init.lua` are both treated as first class, and either is loaded (and accessible through $MYVIMRC) upon startup. I took advantage of this to not only upgrade ourselves to Aniseed, but also to Lua, but it should be noted that the bootstrap can also be written in VimL if you really want to. 
 
