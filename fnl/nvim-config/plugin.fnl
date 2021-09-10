@@ -90,8 +90,6 @@
 
 ; Small, high level interface
 (defn update []
-    (sys.println "Loading plugins...")
-
     (packer.startup packages)
 
     (packer.sync)
