@@ -51,6 +51,10 @@ If you prefer to use your own Fennel module for configuration, this is the line 
 
 Once Aniseed takes over, it automatically compiles all the `.fnl` files it finds, and then runs it starting from `nvim-config.init`. 
 
+In `init.fnl` all the setup functions are called as their own modules, to keep things clean. 
+
+This includes `nvim-config.plugin`, which is where all the packages are specified, downloaded, and installed with their configurations. All configuration related to plugins is kept in this file as well, alongside the package specifications, to keep things clean. 
+
 ## Mentions
 I relied heavily on reading through and attempting to use parts of different repositories
 
