@@ -24,6 +24,15 @@
     ; This problem is exacerbated when we need more commands to be called in the function
     ; For a more consistent behavior and interface, I decided to just define a function as necessary, and pass that
 
+    ; It should also be noted that on a first-load, themes are not yet loaded by packer.nvim before they are required
+    ; This causes a bit of a weird issue, where at least at the time of writing we cannot enable theme as a config or post-install function
+    ; Current solution to this is simply to define an autocommand, which is also semi-supported in Lua at this point
+    ; The following helper function helps to make the hack a little more palatable
+    (defn autocmd [trigger func_str]
+        "Creates an autocommand given the trigger and a function string"
+        (nvim.command (.. "autocmd " trigger " " func_str)))
+
+
     ; Package management
     (use "wbthomason/packer.nvim")
 
@@ -64,12 +73,8 @@
         (keymap "n" "<C-t>" ":FloatermToggle<CR>" {})
         (keymap "t" "<C-t>" "<C-\\><C-n>:FloatermToggle<CR>" {}))
     (use {1 "voldikss/vim-floaterm"
-          :config ( floaterm-config ) })
-
-    ; Themes
-    (defn onedark-config [] (nvim.command "colorscheme onedark"))
-    (use {1 "navarasu/onedark.nvim" 
-          :config ( onedark-config )})
+          :config ( floaterm-config )})
+    (use "dylanaraps/taskrunner.nvim")
 
     ; Git
     (use "tpope/vim-fugitive")
@@ -80,17 +85,27 @@
     (use "tpope/vim-commentary")
 
     ; Language Support
+    (use {1 "neoclide/coc.nvim" 
+          :branch "release"})
     (use "sheerun/vim-polyglot")
     (use "bakpakin/fennel.vim")
     (use "keith/swift.vim")
 
     ; Misc Tools
     (use "vimwiki/vimwiki")
+
+    ; Themes
+    (defn onedark-config []
+        (autocmd "User PackerComplete" "colorscheme onedark"))
+    (use {1 "navarasu/onedark.nvim"
+          :config ( onedark-config )})
 )
 
 ; Small, high level interface
 (defn update []
-    (packer.startup packages)
+    (sys.println "Loading plugins...")
+
+    (packer.startup  packages)
 
     (packer.sync)
 )

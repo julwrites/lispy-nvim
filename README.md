@@ -1,4 +1,3 @@
-# lispy-nvim
 Modern Neovim configuration that bootstraps itself to be lispy
 
 ## Motivation
@@ -31,12 +30,14 @@ For those who are new to Neovim, it can be quite confusing to figure out what th
 
 The basic structure of the configuration is as follows:
 (.config/nvim)
+```
 | init.lua
 | fnl
   | nvim-config
     | init.fnl
     | ...
-    
+```
+
 As of Neovim 0.5, `init.vim` and `init.lua` are both treated as first class, and either is loaded (and accessible through $MYVIMRC) upon startup. I took advantage of this to not only upgrade ourselves to Aniseed, but also to Lua, but it should be noted that the bootstrap can also be written in VimL if you really want to. 
 
 ### Flow
@@ -50,11 +51,14 @@ If you prefer to use your own Fennel module for configuration, this is the line 
 
 Once Aniseed takes over, it automatically compiles all the `.fnl` files it finds, and then runs it starting from `nvim-config.init`. 
 
+In `init.fnl` all the setup functions are called as their own modules, to keep things clean. 
+
+This includes `nvim-config.plugin`, which is where all the packages are specified, downloaded, and installed with their configurations. All configuration related to plugins is kept in this file as well, alongside the package specifications, to keep things clean. 
+
 ## Mentions
 I relied heavily on reading through and attempting to use parts of different repositories
 
 - [Aniseed](https://github.com/Olical/aniseed) Is the base of all the Fennel compilation in the config. I also briefly explored [hotpot.nvim](https://github.com/rktjmp/hotpot.nvim), but it had a different direction than I wanted. 
 - [Conjure](https://github.com/Olical/conjure) Is a REPL for Fennel, which I used to reload my configuration on the fly, once `init.lua` was done.
 - [packer.nvim](https://github.com/wbthomason/packer.nvim) Is a modern package manager for Neovim, which is written in Lua and extremely configurable. 
-- [magic-kit](https://github.com/Olical/magic-kit) I initially tried this, but it was too complex for me to understand. Nonetheless, I referred to it a lot especially to get my bootstrap working. 
-
+- [magic-kit](https://github.com/Olical/magic-kit) I initially tried this, but it was too complex for me to understand. Nonetheless, I referred to it a lot especially to get my bootstrap working.
