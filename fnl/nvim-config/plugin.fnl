@@ -74,6 +74,7 @@
         (keymap "t" "<C-t>" "<C-\\><C-n>:FloatermToggle<CR>" {}))
     (use {1 "voldikss/vim-floaterm"
           :config ( floaterm-config )})
+    (use "dylanaraps/taskrunner.nvim")
 
     ; Git
     (use "tpope/vim-fugitive")
@@ -84,6 +85,8 @@
     (use "tpope/vim-commentary")
 
     ; Language Support
+    (use {1 "neoclide/coc.nvim" 
+          :branch "release"})
     (use "sheerun/vim-polyglot")
     (use "bakpakin/fennel.vim")
     (use "keith/swift.vim")
