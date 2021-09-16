@@ -55,6 +55,42 @@ In `init.fnl` all the setup functions are called as their own modules, to keep t
 
 This includes `nvim-config.plugin`, which is where all the packages are specified, downloaded, and installed with their configurations. All configuration related to plugins is kept in this file as well, alongside the package specifications, to keep things clean. 
 
+### Packages
+These are the packages that I have included in this configuration which I think necessary to use Neovim as an IDE. I will update this list as I use them (or drop them)..
+
+There are others which I have not included in this list, but which I have installed for my own usage. Feel free to replace any of them with your own preferred packages.
+
+Boilerplate for Lispy Nvim:
+- Fennel-based configuration ([Aniseed](https://github.com/Olical/aniseed))
+- Fennel compilation ([Conjure](https://github.com/Olical/conjure))
+- Package management ([packer.nvim](https://github.com/wbthomason/packer.nvim))
+- Lua functions ([plenary.nvim](https://github.com/nvim-lua/plenary.nvim))
+
+Visual interface:
+- Theme ([onedark.nvim](https://github.com/navarasu/onedark.nvim))
+- Dashboard ([dashboard.nvim](https://github.com/glepnir/dashboard-nvim))
+- Status line ([lightline.vim](https://github.com/itchyny/lightline.vim))
+  - Git ([vim-gitgutter](https://github.com/airblade/vim-gitgutter))
+- Terminal ([vim-floaterm](https://github.com/voldikss/vim-floaterm))
+- File explorer ([nvim-tree](https://github.com/kyazdani42/nvim-tree.lua))
+  - Icons ([nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons))
+- Fuzzy finder ([telescope.nvim](https://github.com/nvim-telescope/telescope.nvim))
+
+Software development tools:
+- Syntax ([vim-polyglot](https://github.com/sheerun/vim-polyglot))
+- Linting ([ALE](https://github.com/dense-analysis/ale))
+- Docker ([vim-docker-tools](https://github.com/kkvh/vim-docker-tools))
+- Git ([vim-fugitive](https://github.com/tpope/vim-fugitive)))
+- Text manipulation
+  - Surround ([vim-surround](https://github.com/tpope/vim-surround))
+  - Comments ([vim-commentary](https://github.com/tpope/vim-commentary))
+- Language support ([nvim-lspconfig](https://github.com/neovim/nvim-lspconfig))
+  - LSP Install ([nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall))
+
+Utilities:
+- Wiki ([VimWiki](https://github.com/vimwiki/vimwiki))
+- Tasks ([taskrunner.nvim](https://github.com/dylanaraps/taskrunner.nvim))
+
 ## Mentions
 I relied heavily on reading through and attempting to use parts of different repositories
 
