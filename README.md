@@ -79,14 +79,15 @@ Visual interface:
 Software development tools:
 - Syntax ([vim-polyglot](https://github.com/sheerun/vim-polyglot))
 - Linting ([ALE](https://github.com/dense-analysis/ale))
-- Docker ([vim-docker-tools](https://github.com/kkvh/vim-docker-tools))
-- Git ([vim-fugitive](https://github.com/tpope/vim-fugitive)))
+- Autoformat ([vim-autoformat](https://github.com/vim-autoformat/vim-autoformat)]
 - Text manipulation
   - Surround ([vim-surround](https://github.com/tpope/vim-surround))
   - Comments ([vim-commentary](https://github.com/tpope/vim-commentary))
 - Language support ([nvim-lspconfig](https://github.com/neovim/nvim-lspconfig))
   - LSP Install ([nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall))
   - Fennel ([fennel.vim](https://github.com/bakpakin/fennel.vim))
+- Docker ([vim-docker-tools](https://github.com/kkvh/vim-docker-tools))
+- Git ([vim-fugitive](https://github.com/tpope/vim-fugitive)))
 
 Utilities:
 - Wiki ([VimWiki](https://github.com/vimwiki/vimwiki))

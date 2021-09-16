@@ -1,7 +1,7 @@
 (module nvim-config.plugin
-    {require {sys aniseed.core
-              nvim aniseed.nvim
-              packer packer}})
+        {require {sys aniseed.core
+                  nvim aniseed.nvim
+                  packer packer}})
 
 ; Rebinding nvim.set_keymap to keymap for conciseness
 (local keymap nvim.set_keymap)
@@ -47,13 +47,13 @@
         (use {1 "Olical/conjure"
               :config ( conjure-config )}) ; On-the-fly fennel interpretation
         (use "nvim-lua/plenary.nvim") ; Lua functions, very useful for a lot of lua-based plugins
-    )
+        )
 
     (defn interface []
         ; File explorer
         (use "kyazdani42/nvim-web-devicons") ; Icons for file interaction
         (defn nvim-tree-config [] (keymap "n" "<C-n>" ":NvimTreeToggle<CR>" {}))
-        (use {1 "kyazdani42/nvim-tree.lua" 
+        (use {1 "kyazdani42/nvim-tree.lua"
               :config ( nvim-tree-config )}) ; File explorer
         (defn telescope-config []
             (keymap "n" "<C-p>" ":Telescope<CR>" {})
@@ -63,16 +63,16 @@
         (defn dashboard-config []
             (set nvim.g.dashboard_default_executive "telescope")
             (keymap "n" "<C-k><C-w>" ":Dashboard<CR>" {}))
-        (use {1 "glepnir/dashboard-nvim" 
+        (use {1 "glepnir/dashboard-nvim"
               :config ( dashboard-config )}) ; Startup dashboard
         ; Fuzzy finder
         (use "nvim-telescope/telescope.nvim"
-              :config ( telescope-config )) ; Fuzzy finder
+             :config ( telescope-config )) ; Fuzzy finder
 
         ; Status line
         (use "itchyny/lightline.vim") ; Statusline
         (use "airblade/vim-gitgutter") ; Statusline git indicators
-    )
+        )
 
     (defn utility []
         ; Terminal
@@ -85,14 +85,11 @@
 
         ; Misc Tools
         (use "vimwiki/vimwiki") ; Local wiki
-    )
+        )
 
     (defn programming []
         ; Git
         (use "tpope/vim-fugitive") ; Git manipulation
-
-        ; Docker
-        (use "kkvh/vim-docker-tools") ; Tools for docker manipulation
 
         ; Language Support
         (use "neovim/nvim-lspconfig") ; Neovim's own LSP configuration
@@ -106,24 +103,32 @@
         (use "bakpakin/fennel.vim") ; Fennel
 
         ; Text manipulation
+        (defn autoformat-config []
+            (keymap "n" "<F3>" ":Autoformat<CR>" {})
+            (autocmd "BufWrite *" "Autoformat"))
+        (use {1 "vim-autoformat/vim-autoformat"
+              :config (autoformat-config) }) ; Autoformat using default formatprograms
         (use "tpope/vim-surround") ; Use `S<?>` to surround a visual selection with `<?>`
         (use "tpope/vim-commentary") ; Manipulate comments
         (use "sheerun/vim-polyglot") ; Syntax highlighting
+
+        ; Docker
+        (use "kkvh/vim-docker-tools") ; Tools for docker manipulation
+        )
+
+(defn theme []
+    ; Themes
+    (defn onedark-config []
+        (autocmd "User PackerComplete" "colorscheme onedark"))
+    (use {1 "navarasu/onedark.nvim"
+          :config ( onedark-config )})
     )
 
-    (defn theme []
-        ; Themes
-        (defn onedark-config []
-            (autocmd "User PackerComplete" "colorscheme onedark"))
-        (use {1 "navarasu/onedark.nvim"
-              :config ( onedark-config )})
-    )
-
-    (boilerplate)
-    (interface)
-    (utility)
-    (programming)
-    (theme)
+(boilerplate)
+(interface)
+(utility)
+(programming)
+(theme)
 )
 
 ; Small, high level interface
@@ -131,15 +136,15 @@
     (sys.println "Loading plugins...")
 
     (packer.init
-      {:display 
-        {:non_interactive true}} ; Silent install and update
-      {:profile
-       {:enable true}} ; Enable profiling for package management
-      )
+        {:display
+         {:non_interactive true}} ; Silent install and update
+        {:profile
+         {:enable true}} ; Enable profiling for package management
+        )
 
     (packer.reset)
 
     (spec-packages)
 
     (packer.sync)
- support)
+    support)
