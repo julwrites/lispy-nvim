@@ -104,7 +104,6 @@
         (use {1 "kabouzeid/nvim-lspinstall"
               :config ( setup-lsp )}) ; Enables :LspInstall, which hosts quite a number of LSP installers
         (use "bakpakin/fennel.vim") ; Fennel
-        (use "keith/swift.vim") ; Swift
 
         ; Text manipulation
         (use "tpope/vim-surround") ; Use `S<?>` to surround a visual selection with `<?>`

@@ -86,6 +86,7 @@ Software development tools:
   - Comments ([vim-commentary](https://github.com/tpope/vim-commentary))
 - Language support ([nvim-lspconfig](https://github.com/neovim/nvim-lspconfig))
   - LSP Install ([nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall))
+  - Fennel ([fennel.vim](https://github.com/bakpakin/fennel.vim))
 
 Utilities:
 - Wiki ([VimWiki](https://github.com/vimwiki/vimwiki))
