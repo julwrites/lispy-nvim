@@ -104,6 +104,9 @@
 
         ; Text manipulation
         (defn autoformat-config []
+            (set nvim.g.autoformat_autoindent 0)
+            (set nvim.g.autoformat_retab 0)
+            (set nvim.g.autoformat_remove_trailing_spaces 0)
             (keymap "n" "<F3>" ":Autoformat<CR>" {})
             (autocmd "BufWrite *" "Autoformat"))
         (use {1 "vim-autoformat/vim-autoformat"
