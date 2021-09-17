@@ -35,103 +35,103 @@
     ; This problem is exacerbated when we need more commands to be called in the function
     ; For a more consistent behavior and interface, I decided to just define a function as necessary, and pass that
 
-    (defn boilerplate []
-        ; Package management
-        (use "wbthomason/packer.nvim") ; Package manager
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; Boilerplate packages
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-        ; Fennel
-        (defn aniseed-config [] (set nvim.g.aniseed nvim.v.true))
-        (use {1 "Olical/aniseed"
-              :config ( aniseed-config )}) ; Transpiler for configs in fennel to lua
-        (defn conjure-config [] (keymap "n" "<C-c><C-b>" ":ConjureEvalBuf<CR>" {}))
-        (use {1 "Olical/conjure"
-              :config ( conjure-config )}) ; On-the-fly fennel interpretation
-        (use "nvim-lua/plenary.nvim") ; Lua functions, very useful for a lot of lua-based plugins
-        )
+    ; Package management
+    (use "wbthomason/packer.nvim") ; Package manager
 
-    (defn interface []
-        ; File explorer
-        (use "kyazdani42/nvim-web-devicons") ; Icons for file interaction
-        (defn nvim-tree-config [] (keymap "n" "<C-n>" ":NvimTreeToggle<CR>" {}))
-        (use {1 "kyazdani42/nvim-tree.lua"
-              :config ( nvim-tree-config )}) ; File explorer
-        (defn telescope-config []
-            (keymap "n" "<C-p>" ":Telescope<CR>" {})
-            (keymap "n" "<C-p><C-f>" ":Telescope find_files<CR>" {})
-            (keymap "n" "<C-p><C-m>" ":Telescope oldfiles<CR>" {}))
-        ; Dashboard
-        (defn dashboard-config []
-            (set nvim.g.dashboard_default_executive "telescope")
-            (keymap "n" "<C-k><C-w>" ":Dashboard<CR>" {}))
-        (use {1 "glepnir/dashboard-nvim"
-              :config ( dashboard-config )}) ; Startup dashboard
-        ; Fuzzy finder
-        (use "nvim-telescope/telescope.nvim"
-             :config ( telescope-config )) ; Fuzzy finder
+    ; Fennel
+    (defn aniseed-config [] (set nvim.g.aniseed nvim.v.true))
+    (use {1 "Olical/aniseed"
+          :config ( aniseed-config )}) ; Transpiler for configs in fennel to lua
+    (defn conjure-config [] (keymap "n" "<C-c><C-b>" ":ConjureEvalBuf<CR>" {}))
+    (use {1 "Olical/conjure"
+          :config ( conjure-config )}) ; On-the-fly fennel interpretation
+    (use "nvim-lua/plenary.nvim") ; Lua functions, very useful for a lot of lua-based plugins
 
-        ; Status line
-        (use "itchyny/lightline.vim") ; Statusline
-        (use "airblade/vim-gitgutter") ; Statusline git indicators
-        )
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; Interface packages
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    (defn utility []
-        ; Terminal
-        (defn floaterm-config []
-            (keymap "n" "<C-t>" ":FloatermToggle<CR>" {})
-            (keymap "t" "<C-t>" "<C-\\><C-n>:FloatermToggle<CR>" {}))
-        (use {1 "voldikss/vim-floaterm"
-              :config ( floaterm-config )}) ; Floating terminal
-        (use "dylanaraps/taskrunner.nvim") ; Task runner using gulp or grunt
+    ; File explorer
+    (use "kyazdani42/nvim-web-devicons") ; Icons for file interaction
+    (defn nvim-tree-config [] (keymap "n" "<C-n>" ":NvimTreeToggle<CR>" {}))
+    (use {1 "kyazdani42/nvim-tree.lua"
+          :config ( nvim-tree-config )}) ; File explorer
+    (defn telescope-config []
+        (keymap "n" "<C-p>" ":Telescope<CR>" {})
+        (keymap "n" "<C-p><C-f>" ":Telescope find_files<CR>" {})
+        (keymap "n" "<C-p><C-m>" ":Telescope oldfiles<CR>" {}))
+    ; Dashboard
+    (defn dashboard-config []
+        (set nvim.g.dashboard_default_executive "telescope")
+        (keymap "n" "<C-k><C-w>" ":Dashboard<CR>" {}))
+    (use {1 "glepnir/dashboard-nvim"
+          :config ( dashboard-config )}) ; Startup dashboard
+    ; Fuzzy finder
+    (use "nvim-telescope/telescope.nvim"
+         :config ( telescope-config )) ; Fuzzy finder
 
-        ; Misc Tools
-        (use "vimwiki/vimwiki") ; Local wiki
-        )
+    ; Status line
+    (use "itchyny/lightline.vim") ; Statusline
+    (use "airblade/vim-gitgutter") ; Statusline git indicators
 
-    (defn programming []
-        ; Git
-        (use "tpope/vim-fugitive") ; Git manipulation
-
-        ; Language Support
-        (use "neovim/nvim-lspconfig") ; Neovim's own LSP configuration
-        (fn setup-lsp []
-            ((. (require :lspinstall) :setup))
-            (local servers ((. (require :lspinstall) :installed_servers)))
-            (each [_ server (pairs servers)]
-                ((. (. (require :lspconfig) server) :setup) {})))
-        (use {1 "kabouzeid/nvim-lspinstall"
-              :config ( setup-lsp )}) ; Enables :LspInstall, which hosts quite a number of LSP installers
-        (use "bakpakin/fennel.vim") ; Fennel
-
-        ; Text manipulation
-        (defn autoformat-config []
-            (set nvim.g.autoformat_autoindent 0)
-            (set nvim.g.autoformat_retab 0)
-            (set nvim.g.autoformat_remove_trailing_spaces 0)
-            (keymap "n" "<F3>" ":Autoformat<CR>" {})
-            (autocmd "BufWrite *" "Autoformat"))
-        (use {1 "vim-autoformat/vim-autoformat"
-              :config (autoformat-config) }) ; Autoformat using default formatprograms
-        (use "tpope/vim-surround") ; Use `S<?>` to surround a visual selection with `<?>`
-        (use "tpope/vim-commentary") ; Manipulate comments
-        (use "sheerun/vim-polyglot") ; Syntax highlighting
-
-        ; Docker
-        (use "kkvh/vim-docker-tools") ; Tools for docker manipulation
-        )
-
-(defn theme []
     ; Themes
     (defn onedark-config []
         (autocmd "User PackerComplete" "colorscheme onedark"))
     (use {1 "navarasu/onedark.nvim"
           :config ( onedark-config )})
-    )
 
-(boilerplate)
-(interface)
-(utility)
-(programming)
-(theme)
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; Utility packages
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    ; Terminal
+    (defn floaterm-config []
+        (keymap "n" "<C-t>" ":FloatermToggle<CR>" {})
+        (keymap "t" "<C-t>" "<C-\\><C-n>:FloatermToggle<CR>" {}))
+    (use {1 "voldikss/vim-floaterm"
+          :config ( floaterm-config )}) ; Floating terminal
+    (use "dylanaraps/taskrunner.nvim") ; Task runner using gulp or grunt
+
+    ; Misc Tools
+    (use "vimwiki/vimwiki") ; Local wiki
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; Software Development packages
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    ; Git
+    (use "tpope/vim-fugitive") ; Git manipulation
+
+    ; Language Support
+    (use "neovim/nvim-lspconfig") ; Neovim's own LSP configuration
+    (fn setup-lsp []
+        ((. (require :lspinstall) :setup))
+        (local servers ((. (require :lspinstall) :installed_servers)))
+        (each [_ server (pairs servers)]
+            ((. (. (require :lspconfig) server) :setup) {})))
+    (use {1 "kabouzeid/nvim-lspinstall"
+          :config ( setup-lsp )}) ; Enables :LspInstall, which hosts quite a number of LSP installers
+    (use "bakpakin/fennel.vim") ; Fennel
+
+    ; Text manipulation
+    (defn autoformat-config []
+        (set nvim.g.autoformat_autoindent 0)
+        (set nvim.g.autoformat_retab 0)
+        (set nvim.g.autoformat_remove_trailing_spaces 0)
+        (keymap "n" "<F3>" ":Autoformat<CR>" {})
+        (autocmd "BufWrite *" "Autoformat"))
+    (use {1 "vim-autoformat/vim-autoformat"
+          :config (autoformat-config) }) ; Autoformat using default formatprograms
+    (use "tpope/vim-surround") ; Use `S<?>` to surround a visual selection with `<?>`
+    (use "tpope/vim-commentary") ; Manipulate comments
+    (use "sheerun/vim-polyglot") ; Syntax highlighting
+
+    ; Docker
+    (use "kkvh/vim-docker-tools") ; Tools for docker manipulation
 )
 
 ; Small, high level interface
