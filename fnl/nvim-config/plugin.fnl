@@ -150,4 +150,4 @@
     (spec-packages)
 
     (packer.sync)
-    support)
+)
