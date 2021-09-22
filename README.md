@@ -84,7 +84,7 @@ Software development tools:
   - Surround ([vim-surround](https://github.com/tpope/vim-surround))
   - Comments ([vim-commentary](https://github.com/tpope/vim-commentary))
 - Language support ([nvim-lspconfig](https://github.com/neovim/nvim-lspconfig))
-  - LSP Install ([nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall))
+  - LSP Install ([nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer))
   - Fennel ([fennel.vim](https://github.com/bakpakin/fennel.vim))
 - Docker ([vim-docker-tools](https://github.com/kkvh/vim-docker-tools))
 - Git ([vim-fugitive](https://github.com/tpope/vim-fugitive)))

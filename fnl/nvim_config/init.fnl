@@ -1,8 +1,8 @@
-(module nvim-config.init
+(module nvim_config.init
     {autoload { sys aniseed.core
                 nvim aniseed.nvim
-                plug nvim-config.plugin
-                opts nvim-config.options}})
+                plug nvim_config.plugin
+                opts nvim_config.options}})
 
 ; If you see this, bootstrapper succeeded
 (sys.println "Aniseed found init.fnl...")

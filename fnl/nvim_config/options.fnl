@@ -1,4 +1,4 @@
-(module nvim-config.options
+(module nvim_config.options
         { autoload {nvim aniseed.nvim}})
 
 ; Bind nvim set_keymap to a more concise key

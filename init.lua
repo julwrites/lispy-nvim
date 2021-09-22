@@ -19,7 +19,7 @@ bootstrap("wbthomason", "packer.nvim")
 print("Bootstrapping Aniseed")
 bootstrap("Olical", "aniseed")
 
-vim.g["aniseed#env"] = { module = "nvim-config.init" }
+vim.g["aniseed#env"] = { module = "nvim_config.init" }
 
 print(string.format("Bootstrapper took: %.9f s\n", os.clock() - time_start))
 print("****************************************")
