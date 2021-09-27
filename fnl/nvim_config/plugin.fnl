@@ -101,16 +101,10 @@
     (use "tpope/vim-fugitive") ; Git manipulation
 
     ; Language Support
-    (defn lsp_config [servers]
-        (each [language server (pairs servers)]
-            (. (. (require :lspconfig) server) :setup)
-            ( autocmd "User PackerComplete" "" (.. "LspInstall " server) )))
-    (use "neovim/nvim-lspconfig") ; Neovim's own LSP configuration
-    (use "williamboman/nvim-lsp-installer"
-         { :requires "neovim/nvim-lspconfig" 
-          :config ( lsp_config 
-                    { :python "pyright" 
-                     :typescript "tsserver" }) }) ; Enables :LspInstall, which hosts quite a number of LSP installers
+    (use "neoclide/coc.nvim"
+         {:branch "release"}) ; Extensions for language support
+    (use "dense-analysis/ale"
+         {:setup ( set nvim.g.ale_disable_lsp true )}) ; Linting
     (use "bakpakin/fennel.vim") ; Fennel
 
     ; Text manipulation
