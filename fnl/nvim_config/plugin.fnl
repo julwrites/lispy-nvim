@@ -49,27 +49,38 @@
     ; Interface packages
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    ; File explorer
-    (use "kyazdani42/nvim-web-devicons") ; Icons for file interaction
-    (defn nvim-tree_config [] (keymap "n" "<C-n>" ":NvimTreeToggle<CR>" {}))
-    (use "kyazdani42/nvim-tree.lua"
-         { :config ( nvim-tree_config ) }) ; File explorer
     ; Dashboard
     (defn dashboard_config []
         (set nvim.g.dashboard_default_executive "telescope")
         (keymap "n" "<C-k><C-w>" ":Dashboard<CR>" {}))
     (use "glepnir/dashboard-nvim"
          { :config ( dashboard_config ) }) ; Startup dashboard
+
     ; Fuzzy finder
+    (use "kyazdani42/nvim-web-devicons") ; Icons for file interaction
     (defn telescope_config []
+        ; Chords (Ivy)
+        (keymap "n" "<C-f>" ":Telescope current_buffer_fuzzy_find theme=ivy<CR>" {})
+        (keymap "n" "<C-f><C-t>" ":Telescope treesitter theme=ivy<CR>" {})
+        ; Chords (Dropdown)
+        (keymap "n" "<C-p><C-f>" ":Telescope find_files theme=dropdown<CR>" {})
+        (keymap "n" "<C-p><C-p>" ":Telescope commands theme=dropdown<CR>" {})
+        ; Chords (Float)
         (keymap "n" "<C-p>" ":Telescope<CR>" {})
-        (keymap "n" "<C-p><C-f>" ":Telescope find_files<CR>" {})
+        (keymap "n" "<C-p><C-b>" ":Telescope buffers<CR>" {})
+        (keymap "n" "<C-p><C-n>" ":Telescope file_browser<CR>" {})
         (keymap "n" "<C-p><C-m>" ":Telescope oldfiles<CR>" {}))
     (use "nvim-telescope/telescope.nvim"
          { :config ( telescope_config ) }) ; Fuzzy finder
+    (defn treesitter_config []
+        (autocmd "User PackerComplete" "" "TSUpdate"))
+    (use "nvim-treesitter/nvim-treesitter"
+         { :config ( treesitter_config ) }) ; Treesitter interface
+    (use "BurntSushi/ripgrep") ; Regex search
 
     ; Status line
     (use "itchyny/lightline.vim") ; Statusline
+    (use "maximbaz/lightline-ale") ; Linting indicator for statusline
     (use "airblade/vim-gitgutter") ; Statusline git indicators
 
     ; Themes
@@ -101,10 +112,19 @@
     (use "tpope/vim-fugitive") ; Git manipulation
 
     ; Language Support
+    (defn coc_config []
+        (autocmd "User PackerComplete" "" "CocEnable"))
     (use "neoclide/coc.nvim"
-         {:branch "release"}) ; Extensions for language support
+         {:branch "release"
+          :config ( coc_config )}) ; Extensions for language support
+    (use "fannheyward/telescope-coc.nvim")
+    (defn ale_config []
+        (set nvim.g.ale_sign_error "no")
+        (set nvim.g.ale_sign_warning "um")
+        (set nvim.g.ale_sign_column_always true)
+        (set nvim.g.ale_disable_lsp true))
     (use "dense-analysis/ale"
-         {:setup ( set nvim.g.ale_disable_lsp true )}) ; Linting
+         {:setup ( ale_config )}) ; Linting
     (use "bakpakin/fennel.vim") ; Fennel
 
     ; Text manipulation
