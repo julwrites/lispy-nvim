@@ -61,7 +61,7 @@
     (defn telescope_config []
         ; Chords (Ivy)
         (keymap "n" "<C-f>" ":Telescope current_buffer_fuzzy_find theme=ivy<CR>" {})
-        (keymap "n" "<C-f><C-t>" ":Telescope treesitter theme=ivy<CR>" {})
+        (keymap "n" "<C-f><C-f>" ":Telescope treesitter theme=ivy<CR>" {})
         ; Chords (Dropdown)
         (keymap "n" "<C-p><C-f>" ":Telescope find_files theme=dropdown<CR>" {})
         (keymap "n" "<C-p><C-p>" ":Telescope commands theme=dropdown<CR>" {})
@@ -127,8 +127,8 @@
                                 :css])}) ; Extensions for language support
     (use "fannheyward/telescope-coc.nvim")
     (defn ale_config []
-        (set nvim.g.ale_sign_error "no")
-        (set nvim.g.ale_sign_warning "um")
+        (set nvim.g.ale_sign_error "!!")
+        (set nvim.g.ale_sign_warning "--")
         (set nvim.g.ale_sign_column_always true)
         (set nvim.g.ale_disable_lsp true))
     (use "dense-analysis/ale"
