@@ -63,10 +63,10 @@ Boilerplate for Lispy Nvim:
 - Fennel compilation ([Conjure](https://github.com/Olical/conjure))
 - Package management ([packer.nvim](https://github.com/wbthomason/packer.nvim))
 - Lua functions ([plenary.nvim](https://github.com/nvim-lua/plenary.nvim))
+- Fennel ([fennel.vim](https://github.com/bakpakin/fennel.vim))
 
 Visual interface:
 - Theme ([onedark.nvim](https://github.com/navarasu/onedark.nvim))
-- Dashboard ([dashboard.nvim](https://github.com/glepnir/dashboard-nvim))
 - Status line ([lightline.vim](https://github.com/itchyny/lightline.vim))
   - Git ([vim-gitgutter](https://github.com/airblade/vim-gitgutter))
 - Terminal ([vim-floaterm](https://github.com/voldikss/vim-floaterm))
@@ -79,12 +79,11 @@ Visual interface:
 Software development tools:
 - Syntax Highlighting ([vim-polyglot](https://github.com/sheerun/vim-polyglot))
 - Linting ([ALE](https://github.com/dense-analysis/ale))
+- Language support ([CoC](https://github.com/neoclide/coc.nvim))
 - Autoformat ([vim-autoformat](https://github.com/vim-autoformat/vim-autoformat)]
 - Text manipulation
   - Surround ([vim-surround](https://github.com/tpope/vim-surround))
   - Comments ([vim-commentary](https://github.com/tpope/vim-commentary))
-- Language support ([CoC](https://github.com/neoclide/coc.nvim))
-  - Fennel ([fennel.vim](https://github.com/bakpakin/fennel.vim))
 - Docker ([vim-docker-tools](https://github.com/kkvh/vim-docker-tools))
 - Git ([vim-fugitive](https://github.com/tpope/vim-fugitive)))
 
