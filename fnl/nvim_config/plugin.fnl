@@ -112,11 +112,19 @@
     (use "tpope/vim-fugitive") ; Git manipulation
 
     ; Language Support
-    (defn coc_config []
-        (autocmd "User PackerComplete" "" "CocEnable"))
+    (defn coc_config [extensions]
+        (autocmd "User PackerComplete" "" "CocEnable")
+        (autocmd "User PackerComplete" "" (string.format "CocInstall%s"
+                                                         (accumulate [ext_str ""
+                                                                      _ ext (ipairs extensions)]
+                                                                     (.. ext_str (string.format " coc-%s" ext))))))
     (use "neoclide/coc.nvim"
          {:branch "release"
-          :config ( coc_config )}) ; Extensions for language support
+          :config ( coc_config [:pyright 
+                                :tsserver 
+                                :json 
+                                :html 
+                                :css])}) ; Extensions for language support
     (use "fannheyward/telescope-coc.nvim")
     (defn ale_config []
         (set nvim.g.ale_sign_error "no")
@@ -154,7 +162,7 @@
     (let [packages (spec_packages)]
         (packer.init
             {:display
-             {:non_interactive false}} ; Silent install and update
+             {:non_interactive true}} ; Silent install and update
             {:profile
              {:enable true}} ; Enable profiling for package management
             )
