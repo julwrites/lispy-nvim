@@ -1,3 +1,4 @@
+        (keymap "n" "<C-p><C-f>" ":Telescope find_files theme=ivy<CR>" {})
 (module nvim_config.plugin
         {require {sys aniseed.core
                   nvim aniseed.nvim
@@ -62,9 +63,10 @@
         ; Chords (Ivy)
         (keymap "n" "<C-f>" ":Telescope current_buffer_fuzzy_find theme=ivy<CR>" {})
         (keymap "n" "<C-f><C-f>" ":Telescope treesitter theme=ivy<CR>" {})
+        (keymap "n" "<C-f><C-g>" ":Telescope live_grep theme=ivy<CR>" {})
         ; Chords (Dropdown)
-        (keymap "n" "<C-p><C-f>" ":Telescope find_files theme=dropdown<CR>" {})
         (keymap "n" "<C-p><C-p>" ":Telescope commands theme=dropdown<CR>" {})
+        (keymap "n" "<C-p><C-f>" ":Telescope find_files theme=ivy<CR>" {})
         ; Chords (Float)
         (keymap "n" "<C-p>" ":Telescope<CR>" {})
         (keymap "n" "<C-p><C-b>" ":Telescope buffers<CR>" {})
