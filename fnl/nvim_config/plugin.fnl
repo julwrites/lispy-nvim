@@ -46,16 +46,15 @@
     (use "nvim-lua/plenary.nvim") ; Lua functions, very useful for a lot of lua-based plugins
     (use "tsbohc/zest.nvim") ; Fennel macros for Neovim
 
+    ; Themes
+    (defn onedark_config []
+        (autocmd "User PackerComplete" "" "colorscheme onedark"))
+    (use "navarasu/onedark.nvim"
+         { :config ( onedark_config ) })
+
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; Interface packages
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    ; Dashboard
-    (defn dashboard_config []
-        (set nvim.g.dashboard_default_executive "telescope")
-        (keymap "n" "<C-k><C-w>" ":Dashboard<CR>" {}))
-    (use "glepnir/dashboard-nvim"
-         { :config ( dashboard_config ) }) ; Startup dashboard
 
     ; Fuzzy finder
     (use "kyazdani42/nvim-web-devicons") ; Icons for file interaction
@@ -85,12 +84,6 @@
     (use "maximbaz/lightline-ale") ; Linting indicator for statusline
     (use "airblade/vim-gitgutter") ; Statusline git indicators
 
-    ; Themes
-    (defn onedark_config []
-        (autocmd "User PackerComplete" "" "colorscheme onedark"))
-    (use "navarasu/onedark.nvim"
-         { :config ( onedark_config ) })
-
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; Utility packages
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -104,7 +97,12 @@
     (use "dylanaraps/taskrunner.nvim") ; Task runner using gulp or grunt
 
     ; Misc Tools
-    (use "vimwiki/vimwiki") ; Local wiki
+    (defn vimwiki_config []
+        (set nvim.g.vimwiki_list [{:path "~/julwrites/wiki/vimwiki"
+                                   :syntax "markdown"
+                                   :ext ".md"}]))
+    (use "vimwiki/vimwiki"
+         { :config ( vimwiki_config ) }) ; Local wiki
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; Software Development packages

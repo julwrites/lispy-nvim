@@ -1,3 +1,10 @@
 {
-  "diagnostic.displayByAle": true
+  # Diagnostics
+  "diagnostic.displayByAle": true,
+  # Python
+  "python.linting.lintOnSave": true,
+  # ESLint
+  "eslint.enable": true,
+  "eslint.autoFix": true,
+  "eslint.quiet": true
 }
