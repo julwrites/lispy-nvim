@@ -1,4 +1,3 @@
-        (keymap "n" "<C-p><C-f>" ":Telescope find_files theme=ivy<CR>" {})
 (module nvim_config.plugin
         {require {sys aniseed.core
                   nvim aniseed.nvim
