@@ -82,6 +82,7 @@
     (use "itchyny/lightline.vim") ; Statusline
     (use "maximbaz/lightline-ale") ; Linting indicator for statusline
     (use "airblade/vim-gitgutter") ; Statusline git indicators
+    (use "APZelos/blamer.nvim") ; Inline git blame
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; Utility packages
@@ -123,7 +124,9 @@
                                 :tsserver 
                                 :json 
                                 :html 
-                                :css])}) ; Extensions for language support
+                                :css
+                                :clangd
+                                :cmake])}) ; Extensions for language support
     (use "fannheyward/telescope-coc.nvim")
     (defn ale_config []
         (set nvim.g.ale_sign_error "!!")
@@ -133,6 +136,8 @@
     (use "dense-analysis/ale"
          {:setup ( ale_config )}) ; Linting
     (use "bakpakin/fennel.vim") ; Fennel
+
+    (use "CoatiSoftware/vim-sourcetrail") ; Sourcetrail plugin
 
     ; Text manipulation
     (defn autoformat_config []
