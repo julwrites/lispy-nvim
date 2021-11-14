@@ -61,9 +61,10 @@
         ; Chords (Ivy)
         (keymap "n" "<C-f>" ":Telescope current_buffer_fuzzy_find theme=ivy<CR>" {})
         (keymap "n" "<C-f><C-f>" ":Telescope treesitter theme=ivy<CR>" {})
+        (keymap "n" "<C-f><C-g>" ":Telescope live_grep theme=ivy<CR>" {})
         ; Chords (Dropdown)
-        (keymap "n" "<C-p><C-f>" ":Telescope find_files theme=dropdown<CR>" {})
         (keymap "n" "<C-p><C-p>" ":Telescope commands theme=dropdown<CR>" {})
+        (keymap "n" "<C-p><C-f>" ":Telescope find_files theme=ivy<CR>" {})
         ; Chords (Float)
         (keymap "n" "<C-p>" ":Telescope<CR>" {})
         (keymap "n" "<C-p><C-b>" ":Telescope buffers<CR>" {})
@@ -81,6 +82,7 @@
     (use "itchyny/lightline.vim") ; Statusline
     (use "maximbaz/lightline-ale") ; Linting indicator for statusline
     (use "airblade/vim-gitgutter") ; Statusline git indicators
+    (use "APZelos/blamer.nvim") ; Inline git blame
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; Utility packages
@@ -122,7 +124,9 @@
                                 :tsserver 
                                 :json 
                                 :html 
-                                :css])}) ; Extensions for language support
+                                :css
+                                :clangd
+                                :cmake])}) ; Extensions for language support
     (use "fannheyward/telescope-coc.nvim")
     (defn ale_config []
         (set nvim.g.ale_sign_error "!!")
@@ -132,6 +136,8 @@
     (use "dense-analysis/ale"
          {:setup ( ale_config )}) ; Linting
     (use "bakpakin/fennel.vim") ; Fennel
+
+    (use "CoatiSoftware/vim-sourcetrail") ; Sourcetrail plugin
 
     ; Text manipulation
     (defn autoformat_config []
