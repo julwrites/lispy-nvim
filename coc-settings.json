@@ -6,14 +6,5 @@
   # ESLint
   "eslint.enable": true,
   "eslint.autoFix": true,
-  "eslint.quiet": true,
-  # Elm language server
-  "languageserver": {
-    "elmLS": {
-      "command": "elm-language-server",
-      "filetypes": ["elm"],
-      "rootPatterns": ["elm.json]
-    }
-  },
-  "codeLens.enable": true
+  "eslint.quiet": true
 }

@@ -136,6 +136,7 @@
     (use "dense-analysis/ale"
          {:setup ( ale_config )}) ; Linting
     (use "bakpakin/fennel.vim") ; Fennel
+    (use "elmcast/elm-vim") ; Elm
 
     (use "CoatiSoftware/vim-sourcetrail") ; Sourcetrail plugin
 
@@ -150,7 +151,10 @@
          { :config ( autoformat_config ) }) ; Autoformat using default formatprograms
     (use "tpope/vim-surround") ; Use `S<?>` to surround a visual selection with `<?>`
     (use "tpope/vim-commentary") ; Manipulate comments
-    (use "sheerun/vim-polyglot") ; Syntax highlighting
+    (defn polyglot_config []
+        (set nvim.g.polyglot_disabled ["elm"]))
+    (use "sheerun/vim-polyglot"
+         { :config ( polyglot_config ) }) ; Syntax highlighting
 
     ; Docker
     (use "kkvh/vim-docker-tools") ; Tools for docker manipulation
