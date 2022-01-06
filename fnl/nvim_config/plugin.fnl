@@ -126,7 +126,8 @@
                                 :html 
                                 :css
                                 :clangd
-                                :cmake])}) ; Extensions for language support
+                                :cmake
+                                :flutter-tools])}) ; Extensions for language support (note that `coc-` is prefixed automatically in `coc_config`)
     (use "fannheyward/telescope-coc.nvim")
     (defn ale_config []
         (set nvim.g.ale_sign_error "!!")
@@ -139,11 +140,7 @@
     (use "elmcast/elm-vim") ; Elm
     (use "fatih/vim-go") ; Golang
 
-    (use "thosakwe/vim-flutter") ; Flutter
-
-    (use "natebosch/vim-lsc") ;
     (use "dart-lang/dart-vim-plugin") ; Dart
-    (use "natebosch/vim-lsc-dart") ;
 
     (use "CoatiSoftware/vim-sourcetrail") ; Sourcetrail plugin
 
