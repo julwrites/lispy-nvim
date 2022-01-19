@@ -68,7 +68,6 @@
         ; Chords (Float)
         (keymap "n" "<C-p>" ":Telescope<CR>" {})
         (keymap "n" "<C-p><C-b>" ":Telescope buffers<CR>" {})
-        (keymap "n" "<C-p><C-n>" ":Telescope file_browser<CR>" {})
         (keymap "n" "<C-p><C-m>" ":Telescope oldfiles<CR>" {}))
     (use "nvim-telescope/telescope.nvim"
          { :config ( telescope_config ) }) ; Fuzzy finder
