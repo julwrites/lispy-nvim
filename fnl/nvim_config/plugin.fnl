@@ -103,6 +103,8 @@
     (use "vimwiki/vimwiki"
          { :config ( vimwiki_config ) }) ; Local wiki
 
+    (use "wannesm/wmgraphviz.vim") ; Graphviz
+
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; Software Development packages
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
