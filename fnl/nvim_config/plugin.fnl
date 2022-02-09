@@ -128,6 +128,8 @@
                                 :css
                                 :clangd
                                 :cmake
+                                :sourcekit
+                                :rust-analyzer
                                 :flutter-tools])}) ; Extensions for language support (note that `coc-` is prefixed automatically in `coc_config`)
     (use "fannheyward/telescope-coc.nvim")
     (defn ale_config []
