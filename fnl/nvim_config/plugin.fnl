@@ -105,6 +105,9 @@
 
     (use "wannesm/wmgraphviz.vim") ; Graphviz
 
+    (use "sindrets/diffview.nvim"
+         { :requires "nvim-lua/plenary.nvim" }) ; Difftool
+
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; Software Development packages
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
