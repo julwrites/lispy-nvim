@@ -94,6 +94,7 @@
     (use "voldikss/vim-floaterm"
          { :config ( floaterm_config ) }) ; Floating terminal
     (use "dylanaraps/taskrunner.nvim") ; Task runner using gulp or grunt
+    (use "chipsenkbeil/distant.nvim") ; Remote development over SSH or distant
 
     ; Misc Tools
     (defn vimwiki_config []
@@ -114,6 +115,9 @@
 
     ; Git
     (use "tpope/vim-fugitive") ; Git manipulation
+
+    (use "TimUntersberger/neogit"
+        { :requires "nvim-lua/plenary.nvim" }) ; Magit for Vim
 
     ; Language Support
     (defn coc_config [extensions]
@@ -146,7 +150,8 @@
     (use "elmcast/elm-vim") ; Elm
     (use "fatih/vim-go") ; Golang
 
-    (use "dart-lang/dart-vim-plugin") ; Dart
+    (use "dart-lang/dart-vim-plugin"
+         {:config (set nvim.g.dart_format_on_save true)}) ; Dart
 
     (use "CoatiSoftware/vim-sourcetrail") ; Sourcetrail plugin
 
