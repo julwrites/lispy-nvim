@@ -94,7 +94,11 @@
     (use "voldikss/vim-floaterm"
          { :config ( floaterm_config ) }) ; Floating terminal
     (use "dylanaraps/taskrunner.nvim") ; Task runner using gulp or grunt
-    (use "chipsenkbeil/distant.nvim") ; Remote development over SSH or distant
+
+    (defn distant_config []
+        (autocmd "User PackerComplete" "" "DistantInstall"))
+    (use "chipsenkbeil/distant.nvim"
+         { :config ( distant_config) ) ; Remote development over SSH or distant
 
     ; Misc Tools
     (defn vimwiki_config []
