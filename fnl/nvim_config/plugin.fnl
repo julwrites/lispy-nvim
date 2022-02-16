@@ -2,11 +2,9 @@
         {require {sys aniseed.core
                   nvim aniseed.nvim
                   packer packer
-                  utils nvim_config.utils
                   quick arshlib.quick}})
 
 ; Local bindings for conciseness
-; (local autocmd utils.vim_autocmd)
 (local autocmd quick.autocmd)
 (local keymap nvim.set_keymap)
 
