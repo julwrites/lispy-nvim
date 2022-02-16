@@ -2,10 +2,12 @@
         {require {sys aniseed.core
                   nvim aniseed.nvim
                   packer packer
-                  utils nvim_config.utils}})
+                  utils nvim_config.utils
+                  quick arshlib.quick}})
 
 ; Local bindings for conciseness
-(local autocmd utils.vim_autocmd)
+; (local autocmd utils.vim_autocmd)
+(local autocmd quick.autocmd)
 (local keymap nvim.set_keymap)
 
 (defn spec_packages []
@@ -25,7 +27,7 @@
     (defn use [name spec]
         (tset packages name {})
         (when (= (type spec) :table)
-          (each [key value (pairs spec)]
+            (each [key value (pairs spec)]
               (tset (. packages name) key value))))
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -33,7 +35,11 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     ; Package management
+    (use "norcalli/nvim.lua") ; Lua functions for nvim
     (use "wbthomason/packer.nvim") ; Package manager
+    (use "nvim-lua/plenary.nvim") ; Lua functions, very useful for a lot of lua-based plugins
+    (use "MunifTanjim/nui.nvim") ; UI for Neovim
+    (use "arsham/arshlib.nvim") ; Functions for Neovim
 
     ; Fennel
     (defn aniseed_config [] (set nvim.g.aniseed nvim.v.true))
@@ -42,12 +48,13 @@
     (defn conjure_config [] (keymap "n" "<C-c><C-b>" ":ConjureEvalBuf<CR>" {}))
     (use "Olical/conjure"
          { :config ( conjure_config ) }) ; On-the-fly fennel interpretation
-    (use "nvim-lua/plenary.nvim") ; Lua functions, very useful for a lot of lua-based plugins
     (use "tsbohc/zest.nvim") ; Fennel macros for Neovim
 
     ; Themes
+    (defn colorscheme []
+        (nvim.command "colorscheme onedark"))
     (defn onedark_config []
-        (autocmd "User PackerComplete" "" "colorscheme onedark"))
+        (autocmd [ "User PackerComplete" "" colorscheme ]))
     (use "navarasu/onedark.nvim"
          { :config ( onedark_config ) })
 
@@ -71,8 +78,10 @@
         (keymap "n" "<C-p><C-m>" ":Telescope oldfiles<CR>" {}))
     (use "nvim-telescope/telescope.nvim"
          { :config ( telescope_config ) }) ; Fuzzy finder
+    (defn treesitter_update []
+        (nvim.command "TSUpdate"))
     (defn treesitter_config []
-        (autocmd "User PackerComplete" "" "TSUpdate"))
+        (autocmd [ "User PackerComplete" "" treesitter_update ]))
     (use "nvim-treesitter/nvim-treesitter"
          { :config ( treesitter_config ) }) ; Treesitter interface
     (use "BurntSushi/ripgrep") ; Regex search
@@ -115,16 +124,25 @@
     ; Git
     (use "tpope/vim-fugitive") ; Git manipulation
 
+    (defn neogit_setup []
+        (. (require :neogit) :setup))
+    (defn neogit_config [] 
+        (autocmd [ "User PackerComplete" "" neogit_setup ]))
     (use "TimUntersberger/neogit"
-        { :requires "nvim-lua/plenary.nvim" }) ; Magit for Vim
+        { :requires "nvim-lua/plenary.nvim"
+          :config ( neogit_config ) }) ; Magit for Vim
 
     ; Language Support
+    (defn coc_enable []
+        (nvim.command "CocEnable"))
+    (defn coc_install [extensions]
+        (nvim.command (string.format "CocInstall%s"
+                                     (accumulate [ext_str ""
+                                                  _ ext (ipairs extensions)]
+                                                 (.. ext_str (string.format " coc-%s" ext))))))
     (defn coc_config [extensions]
-        (autocmd "User PackerComplete" "" "CocEnable")
-        (autocmd "User PackerComplete" "" (string.format "CocInstall%s"
-                                                         (accumulate [ext_str ""
-                                                                      _ ext (ipairs extensions)]
-                                                                     (.. ext_str (string.format " coc-%s" ext))))))
+        (autocmd [ "User PackerComplete" "" coc_enable ]))
+        ; (autocmd [ "User PackerComplete" "" coc_install ]))
     (use "neoclide/coc.nvim"
          {:branch "release"
           :config ( coc_config [:pyright 
@@ -155,12 +173,15 @@
     (use "CoatiSoftware/vim-sourcetrail") ; Sourcetrail plugin
 
     ; Text manipulation
+    (defn autoformat []
+        (nvim.command ":Autoformat"))
     (defn autoformat_config []
         (set nvim.g.autoformat_autoindent 0)
         (set nvim.g.autoformat_retab 0)
         (set nvim.g.autoformat_remove_trailing_spaces 0)
         (keymap "n" "<F3>" ":Autoformat<CR>" {})
-        (autocmd "BufWrite" "*" "Autoformat"))
+        (autocmd [ "BufWrite" "*" autoformat ])
+        )
     (use "vim-autoformat/vim-autoformat"
          { :config ( autoformat_config ) }) ; Autoformat using default formatprograms
     (use "tpope/vim-surround") ; Use `S<?>` to surround a visual selection with `<?>`
@@ -184,7 +205,7 @@
     (let [packages (spec_packages)]
         (packer.init
             {:display
-             {:non_interactive true}} ; Silent install and update
+             {:non_interactive false}} ; Silent install and update
             {:profile
              {:enable true}} ; Enable profiling for package management
             )

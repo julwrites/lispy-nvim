@@ -13,11 +13,23 @@ function bootstrap (user, repo)
     end
 end
 
+print("Bootstrapping Nvim.lua")
+bootstrap("norcalli", "nvim.lua")
+
 print("Bootstrapping Packer.nvim")
 bootstrap("wbthomason", "packer.nvim")
 
 print("Bootstrapping Aniseed")
 bootstrap("Olical", "aniseed")
+
+print("Bootstrapping Plenary")
+bootstrap("nvim-lua", "plenary.nvim")
+
+print("Bootstrapping Nui")
+bootstrap("MunifTanjim", "nui.nvim")
+
+print("Bootstrapping Arshlib")
+bootstrap("arsham", "arshlib.nvim")
 
 vim.g["aniseed#env"] = { module = "nvim_config.init" }
 
