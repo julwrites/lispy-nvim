@@ -123,7 +123,12 @@
     (use "tpope/vim-fugitive") ; Git manipulation
 
     (defn neogit_setup []
-        (. (require :neogit) :setup))
+        ((. (require :neogit) :setup) 
+         {:use_magit_keybindings true
+          :integrations { 
+                         :diffview true 
+                         }
+          }))
     (defn neogit_config [] 
         (autocmd [ "User PackerComplete" "" neogit_setup ]))
     (use "TimUntersberger/neogit"
