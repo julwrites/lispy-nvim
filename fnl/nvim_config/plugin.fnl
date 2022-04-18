@@ -37,7 +37,8 @@
     (use "wbthomason/packer.nvim") ; Package manager
     (use "nvim-lua/plenary.nvim") ; Lua functions, very useful for a lot of lua-based plugins
     (use "MunifTanjim/nui.nvim") ; UI for Neovim
-    (use "arsham/arshlib.nvim") ; Functions for Neovim
+    (use "arsham/arshlib.nvim"
+         { :requires [ "nvim-lua/plenary.nvim" "MunifTanjim/nui.nvim" ] }) ; Functions for Neovim
 
     ; Fennel
     (defn aniseed_config [] (set nvim.g.aniseed nvim.v.true))
@@ -52,7 +53,10 @@
     (defn colorscheme []
         (nvim.command "colorscheme onedark"))
     (defn onedark_config []
-        (autocmd [ "User PackerComplete" "" colorscheme ]))
+        (autocmd { 
+                  :events "User PackerComplete"
+                  :pattern ""
+                  :callback colorscheme }))
     (use "navarasu/onedark.nvim"
          { :config ( onedark_config ) })
 
@@ -79,7 +83,10 @@
     (defn treesitter_update []
         (nvim.command "TSUpdate"))
     (defn treesitter_config []
-        (autocmd [ "User PackerComplete" "" treesitter_update ]))
+        (autocmd {
+                  :events "User PackerComplete"
+                  :pattern ""
+                  :callback treesitter_update }))
     (use "nvim-treesitter/nvim-treesitter"
          { :config ( treesitter_config ) }) ; Treesitter interface
     (use "BurntSushi/ripgrep") ; Regex search
@@ -130,7 +137,10 @@
                          }
           }))
     (defn neogit_config [] 
-        (autocmd [ "User PackerComplete" "" neogit_setup ]))
+        (autocmd { 
+                  :events "User PackerComplete"
+                  :pattern ""
+                  :callback neogit_setup }))
     (use "TimUntersberger/neogit"
         { :requires "nvim-lua/plenary.nvim"
           :config ( neogit_config ) }) ; Magit for Vim
@@ -143,9 +153,12 @@
                                      (accumulate [ext_str ""
                                                   _ ext (ipairs extensions)]
                                                  (.. ext_str (string.format " coc-%s" ext))))))
-    (defn coc_config [extensions]
-        (autocmd [ "User PackerComplete" "" coc_enable ]))
-        ; (autocmd [ "User PackerComplete" "" coc_install ]))
+     (defn coc_config [extensions]
+        (autocmd { 
+                  :events "User PackerComplete"
+                  :pattern ""
+                  :callback coc_enable }))
+        ; (autocmd { :events "User PackerComplete" :pattern "" :callback coc_install }))
     (use "neoclide/coc.nvim"
          {:branch "release"
           :config ( coc_config [:pyright 
@@ -183,7 +196,10 @@
         (set nvim.g.autoformat_retab 0)
         (set nvim.g.autoformat_remove_trailing_spaces 0)
         (keymap "n" "<F3>" ":Autoformat<CR>" {})
-        (autocmd [ "BufWrite" "*" autoformat ])
+        (autocmd { 
+                  :events "BufWrite" 
+                  :pattern "*" 
+                  :callback autoformat })
         )
     (use "vim-autoformat/vim-autoformat"
          { :config ( autoformat_config ) }) ; Autoformat using default formatprograms
