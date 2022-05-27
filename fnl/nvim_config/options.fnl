@@ -1,9 +1,6 @@
 (module nvim_config.options
         { autoload {nvim aniseed.nvim}})
 
-; Bind nvim set_keymap to a more concise key
-(local keymap nvim.set_keymap)
-
 (defn define []
     ; Some notes on options:
     ; Quite a number of options are available through nvim, and therefore through aniseed
