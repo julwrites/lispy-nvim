@@ -80,15 +80,7 @@
         (keymap "n" "<C-p><C-m>" ":Telescope oldfiles<CR>" {}))
     (use "nvim-telescope/telescope.nvim"
          { :config ( telescope_config ) }) ; Fuzzy finder
-    (defn treesitter_update []
-        (nvim.command "TSUpdate"))
-    (defn treesitter_config []
-        (autocmd {
-                  :events "User PackerComplete"
-                  :pattern ""
-                  :callback treesitter_update }))
-    (use "nvim-treesitter/nvim-treesitter"
-         { :config ( treesitter_config ) }) ; Treesitter interface
+    (use "nvim-treesitter/nvim-treesitter") 
     (use "BurntSushi/ripgrep") ; Regex search
 
     ; Status line
