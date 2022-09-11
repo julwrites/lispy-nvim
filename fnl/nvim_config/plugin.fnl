@@ -149,8 +149,8 @@
         (autocmd { 
                   :events "User PackerComplete"
                   :pattern ""
-                  :callback coc_enable }))
-        ; (autocmd { :events "User PackerComplete" :pattern "" :callback coc_install }))
+                  :callback coc_enable })
+        (autocmd { :events "User PackerComplete" :pattern "" :callback coc_install }))
     (use "neoclide/coc.nvim"
          {:branch "release"
           :config ( coc_config [:pyright 
@@ -162,7 +162,8 @@
                                 :cmake
                                 :sourcekit
                                 :rust-analyzer
-                                :flutter-tools])}) ; Extensions for language support (note that `coc-` is prefixed automatically in `coc_config`)
+                                :flutter-tools
+                                :volar])}) ; Extensions for language support (note that `coc-` is prefixed automatically in `coc_config`)
     (use "fannheyward/telescope-coc.nvim")
     (defn ale_config []
         (set nvim.g.ale_sign_error "!!")
@@ -197,10 +198,6 @@
          { :config ( autoformat_config ) }) ; Autoformat using default formatprograms
     (use "tpope/vim-surround") ; Use `S<?>` to surround a visual selection with `<?>`
     (use "tpope/vim-commentary") ; Manipulate comments
-    (defn polyglot_config []
-        (set nvim.g.polyglot_disabled ["elm"]))
-    (use "sheerun/vim-polyglot"
-         { :config ( polyglot_config ) }) ; Syntax highlighting
 
     ; Docker
     (use "kkvh/vim-docker-tools") ; Tools for docker manipulation
